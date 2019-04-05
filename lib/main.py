@@ -82,28 +82,28 @@ def main(coin):
       if len(argv) >= 4:
         passphrase = argv[3]
 	  
-      print "Generating new " + coin.name + " private key..."
-      print
-      print "Additional Entropy:   ", supplied_entropy
-      print "Passphrase:           ", passphrase
+      #print "Generating new " + coin.name + " private key..."
+      #print
+      #print "Additional Entropy:   ", supplied_entropy
+      #print "Passphrase:           ", passphrase
 
       # Generate some randomness
       generated_entropy = SystemRandom().randint(1, pow(2, 384))
-      print "System entropy:       ", generated_entropy
+      #print "System entropy:       ", generated_entropy
 	
       # Combined entropy
       combined_entropy = str(generated_entropy) + supplied_entropy
-      print "Combined Entropy:     ", combined_entropy
+      #print "Combined Entropy:     ", combined_entropy
 	
       # Hash to form conditioned entropy
       entropy = sha256(combined_entropy).digest()
-      print "Conditioned Entropy:  ", binascii.hexlify(entropy)
+      #print "Conditioned Entropy:  ", binascii.hexlify(entropy)
 
       # Create word set
       word_set = word_encoder.encode(entropy)
       recovered = word_encoder.decode(word_set)
       assert entropy == recovered, "Problem decoding generated phrase"
-      print "Entropy as words:     ", word_set
+      print word_set
 
     elif (argv[1].lower() == "recover"):
       if len(argv) >= 3:
